@@ -24,7 +24,6 @@ async def index():
     return RedirectResponse("https://www.youtube.com/watch?v=xvFZjo5PgG0")
 
 
-
 @app.put("/addQuote/")
 async def add_new_quote(input_body: QuoteRequestStruct) -> None:
     await add_quote(input_body.movie,
@@ -33,7 +32,6 @@ async def add_new_quote(input_body: QuoteRequestStruct) -> None:
                     input_body.type,
                     input_body.imageUrl,
                     )
-
 
 
 @app.put("/addDescription")

@@ -4,7 +4,7 @@ import motor.motor_asyncio
 from dotenv import load_dotenv
 
 
-def createdb(connectionobj, databasename, collectionname) -> Any:
+def create_db(connectionobj, databasename, collectionname) -> Any:
     db = connectionobj[databasename]
     collection = db[collectionname]
     return collection
@@ -79,8 +79,6 @@ if __name__ == "logic_layer.backend":
     load_dotenv()
     client: str = os.environ.get("mongoDb")
     conn = motor.motor_asyncio.AsyncIOMotorClient(client)
-
-    # Connection cursors start from here
-    quoteCol = createdb(conn, "DiscordBot", "Quotes")
-    Loading_Message = createdb(conn, "DiscordBot", "Loading_Message")
-    description_cursor = createdb(conn, "DiscordBot", "Description")
+    quoteCol = create_db(conn, "DiscordBot", "Quotes")
+    Loading_Message = create_db(conn, "DiscordBot", "Loading_Message")
+    description_cursor = create_db(conn, "DiscordBot", "Description")
