@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from typing import Dict
 
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
@@ -14,7 +13,8 @@ app: FastAPI = FastAPI(
    
    This basically contains the methods the webapp will use to insert 
    specific items in Database which is used by the bot ☁️
-    """
+    """,
+    swagger_ui_parameters={"defaultModelsExpandDepth": -1}
 
 )
 
