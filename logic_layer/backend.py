@@ -75,10 +75,25 @@ async def update_quote_image(movie: str, imageurl: str) -> None:
         })
 
 
+async def get_random_quote(noOfDocuments: int = 1) -> Dict:
+    async for i in quoteCol.aggregate([{"$sample": {"size": noOfDocuments}}, {"$project": {"_id":0}}]):
+        return i
+
+
+async def get_random_loading_message(noOfDocuments: int = 1) -> str:
+    async for i in Loading_Message.aggregate([{"$sample": {"size": noOfDocuments}}]):
+        return i["message"]
+
+
+async def get_random_description(noOfDescription: int = 1) -> str:
+    async for i in description_cursor.aggregate([{"$sample": {"size": noOfDescription}}]):
+        return i["description"]
+
+
 if __name__ == "logic_layer.backend":
     load_dotenv()
     client: str = os.environ.get("mongoDb")
     conn = motor.motor_asyncio.AsyncIOMotorClient(client)
     quoteCol = create_db(conn, "DiscordBot", "Quotes")
-    Loading_Message = create_db(conn, "DiscordBot", "Loading_Message")
+    Loading_Message = create_db(conn, "DiscordBot", "LoadingMessage")
     description_cursor = create_db(conn, "DiscordBot", "Description")

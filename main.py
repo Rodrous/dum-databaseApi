@@ -4,7 +4,8 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
 from helpers.helperClasses import QuoteRequestStruct, AddDescription, AddLoadingMessage, UpdateQuoteImage
-from logic_layer.backend import add_quote, add_descriptions, update_quote_image, add_waiting_message
+from logic_layer.backend import add_quote, add_descriptions, update_quote_image, add_waiting_message, get_random_quote, \
+    get_random_loading_message, get_random_description
 
 app: FastAPI = FastAPI(
     title="Database API",
@@ -47,3 +48,18 @@ async def waiting_message(input_body: AddLoadingMessage) -> None:
 @app.put("/updateQuoteImage")
 async def quote_image_update(input_body: UpdateQuoteImage) -> None:
     await update_quote_image(input_body.movie, input_body.imageUrl)
+
+
+@app.get("/getRandomQuote")
+async def random_quote():
+    return await get_random_quote()
+
+
+@app.get("/getRandomLoadingMessage")
+async def random_loading_message() -> str:
+    return await get_random_loading_message()
+
+
+@app.get("/getRandomDescription")
+async def random_description() -> str:
+    return await get_random_description()

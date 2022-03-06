@@ -15,7 +15,7 @@ Since its built with `fast-api` you can just run:
 
 ## Todo List
 - [ ] Add Authentication to limit access to database.
-- [ ] Add GET methods to retrive items
+- [X] Add GET methods to retrieve items
 
 ## Contributions
 Any type of Contribution is Appreciated.
