@@ -14,7 +14,8 @@ Since its built with `fast-api` you can just run:
  ```
 
 ## Todo List
-- [ ] Add Authentication to limit access to database.
+- [X] Add Authentication to limit access to database.
+  - [ ] Improve Security
 - [X] Add GET methods to retrieve items
 
 ## Contributions
