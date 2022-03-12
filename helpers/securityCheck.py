@@ -15,7 +15,7 @@ class UserInfoVerification:
         return self.password_context.hash(self.password)
 
     async def authenticate(self):
-        user_verification: Dict | None = await authenticateUser(self.username)
+        user_verification: str | None = await authenticateUser(self.username)
         if user_verification:
             if self.verify_password(self.password, user_verification):
                 return True
