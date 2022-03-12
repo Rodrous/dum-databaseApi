@@ -61,7 +61,7 @@ async def add_descriptions(description: str) -> None:
 
 
 async def add_waiting_message(message: str) -> None:
-    await Loading_Message.update_one({"message": message},
+    await loading_Message.update_one({"message": message},
                                      {"$setOnInsert": {"message": message}},
                                      upsert=True)
 
@@ -76,12 +76,12 @@ async def update_quote_image(movie: str, imageurl: str) -> None:
 
 
 async def get_random_quote(noOfDocuments: int = 1) -> Dict:
-    async for i in quoteCol.aggregate([{"$sample": {"size": noOfDocuments}}, {"$project": {"_id":0}}]):
+    async for i in quoteCol.aggregate([{"$sample": {"size": noOfDocuments}}, {"$project": {"_id": 0}}]):
         return i
 
 
 async def get_random_loading_message(noOfDocuments: int = 1) -> str:
-    async for i in Loading_Message.aggregate([{"$sample": {"size": noOfDocuments}}]):
+    async for i in loading_Message.aggregate([{"$sample": {"size": noOfDocuments}}]):
         return i["message"]
 
 
@@ -90,10 +90,22 @@ async def get_random_description(noOfDescription: int = 1) -> str:
         return i["description"]
 
 
+async def authenticateUser(userName: str) -> Optional[Dict]:
+    userInfo = await authentication.find_one({
+        "user": userName
+    },
+    {"_id":0}
+    )
+    if userInfo:
+        return userInfo["password"]
+
+
 if __name__ == "logic_layer.backend":
     load_dotenv()
     client: str = os.environ.get("mongoDb")
     conn = motor.motor_asyncio.AsyncIOMotorClient(client)
+
     quoteCol = create_db(conn, "DiscordBot", "Quotes")
-    Loading_Message = create_db(conn, "DiscordBot", "LoadingMessage")
+    loading_Message = create_db(conn, "DiscordBot", "LoadingMessage")
     description_cursor = create_db(conn, "DiscordBot", "Description")
+    authentication = create_db(conn, "DiscordBot", "authenticate")

@@ -4,3 +4,6 @@ motor>=2.5.1
 pymongo[srv]
 pydantic~=1.9.0
 python-dotenv~=0.19.2
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]
