@@ -51,4 +51,4 @@ class AddLoadingMessage(BaseModel):
 
 class UpdateQuoteImage(BaseModel):
     movie: str
-    imageUrl: HttpUrl
+    imageUrl: str
