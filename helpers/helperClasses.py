@@ -7,7 +7,7 @@ class QuoteRequestStruct(BaseModel):
     movie: str
     character: str
     quote: List[List[Union[str, Optional[Dict[str, bool]]]]]
-    imageUrl: Optional[HttpUrl]
+    imageUrl: Optional[str]
     type: Optional[str]
 
     class Config:
