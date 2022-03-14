@@ -90,7 +90,7 @@ async def get_random_description(noOfDescription: int = 1) -> str:
         return i["description"]
 
 
-async def authenticateUser(userName: str) -> Optional[Dict]:
+async def authenticateUser(userName: str) -> Optional[str]:
     userInfo = await authentication.find_one({
         "user": userName
     },
